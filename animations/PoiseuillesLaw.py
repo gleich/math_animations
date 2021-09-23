@@ -1,3 +1,4 @@
+from time import sleep
 from manimlib import *
 from datetime import datetime
 
@@ -5,7 +6,7 @@ text_font = "CMU Serif"
 title_font_size = 80
 subtitle_font_size = 50
 play_kw = {"run_time": 3, "rate_func": smooth}
-
+presentation_mode = True
 raw_equation = "Q = \\frac{\\pi r^4 \\Delta P}{8 \\eta L}"
 
 
@@ -30,7 +31,10 @@ class PoiseuillesLaw(Scene):
         dummy_text = Text(".")
         self.play(Write(dummy_text))
         self.clear()
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
 
     def intro(self):
         self.clear()
@@ -44,7 +48,10 @@ class PoiseuillesLaw(Scene):
         VGroup(title, class_text, by).arrange(DOWN, buff=0.5)
         self.play(Write(title), **play_kw)
         self.play(Write(class_text), Write(by), **play_kw)
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(
             FadeOut(title, shift=LEFT), Uncreate(class_text), FadeOut(by, shift=RIGHT)
         )
@@ -60,9 +67,15 @@ class PoiseuillesLaw(Scene):
         VGroup(eq, name).arrange(DOWN, buff=1)
         self.play(Write(eq), Write(name), **play_kw)
         self.wait()
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(TransformMatchingTex(eq, textbook_eq))
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(Uncreate(textbook_eq), FadeOut(name, DOWN))
         self.clear()
 
@@ -80,7 +93,10 @@ class PoiseuillesLaw(Scene):
         )
         variables.arrange(DOWN)
         self.play(FadeIn(eq, DOWN + LEFT), Write(variables, **play_kw))
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(Uncreate(variables), FadeOut(eq, UP + RIGHT))
         self.clear()
 
@@ -93,7 +109,10 @@ class PoiseuillesLaw(Scene):
             font=text_font,
         )
         self.play(FadeIn(title, DOWN + RIGHT), Write(assumptions, **play_kw))
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(Uncreate(assumptions), FadeOut(title, UP + LEFT))
         self.clear()
 
@@ -106,7 +125,10 @@ class PoiseuillesLaw(Scene):
             font=text_font,
         )
         self.play(FadeIn(title, DOWN + RIGHT), Write(problem, **play_kw))
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(Uncreate(problem), FadeOut(title, UP + LEFT))
         self.clear()
 
@@ -128,7 +150,10 @@ class PoiseuillesLaw(Scene):
             Write(variables, **play_kw),
             Write(eq, **play_kw),
         )
-        input()
+        if presentation_mode:
+            input()
+        else:
+            sleep(2)
         self.play(
             FadeOut(title, UP + LEFT), FadeOut(eq, LEFT), FadeOut(variables, RIGHT)
         )
@@ -160,4 +185,7 @@ class PoiseuillesLaw(Scene):
                     Transform(past_math, math),
                     Transform(past_description, description),
                 )
-            input()
+            if presentation_mode:
+                input()
+            else:
+                sleep(2)
