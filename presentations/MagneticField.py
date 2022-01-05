@@ -29,7 +29,6 @@ class Problem(Scene):
         )
         name = Tex("By Matt Gleich").next_to(title, DOWN, buff=0.3).shift(LEFT * 2.65)
         self.play(Write(title), Write(name), DrawBorderThenFill(logo), run_time=2.5)
-        self.wait(WAIT_TIME)
         self.play(FadeOut(title, name, logo))
         self.clear()
 
@@ -41,6 +40,7 @@ class Problem(Scene):
         self.play(Write(title))
         self.wait(WAIT_TIME)
         self.play(Write(eq), Create(eq_box))
+        self.wait(WAIT_TIME)
 
         # variables
         mass_def = Tex(f"mass ($ m $) $ \\rightarrow $ $ {exponential_fmt(MASS)} $ kg")
@@ -62,8 +62,11 @@ class Problem(Scene):
             .shift(RIGHT * 1.45)
         )
         self.play(Write(mass_def))
+        self.wait(WAIT_TIME)
         self.play(Write(velocity_def))
+        self.wait(WAIT_TIME)
         self.play(Write(strength_def))
+        self.wait(WAIT_TIME)
         self.play(Write(charge_def))
         self.wait(WAIT_TIME)
 
@@ -90,14 +93,15 @@ class Problem(Scene):
         self.play(Create(b_field), Write(b_field_tex))
         self.wait(WAIT_TIME)
         self.play(point.animate.next_to(circ, buff=0).shift(LEFT * 0.1))
-        self.play(
-            MoveAlongPath(
-                point,
-                circ if PROTON else circ.reverse_points(),
-            ),
-            run_time=((2 * math.pi * answer) / VELOCITY) / 1e-7,
-            rate_func=linear,
-        )
+        for _ in range(3):
+            self.play(
+                MoveAlongPath(
+                    point,
+                    circ if PROTON else circ.reverse_points(),
+                ),
+                run_time=((2 * math.pi * answer) / VELOCITY) / 1e-7,
+                rate_func=linear,
+            )
 
         self.play(FadeOut(eq, circ, point, center, line, b_field, b_field_tex))
         self.clear()
