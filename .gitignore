@@ -130,3 +130,5 @@ dmypy.json
 
 # macOS crap
 .DS_Store
+
+media/

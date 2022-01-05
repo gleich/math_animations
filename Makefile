@@ -1,5 +1,5 @@
 run:
-	poetry run manimgl animations/$(PROBLEM).py $(PROBLEM) -c "#000"
+	manim -pqk --fps 120 --renderer opengl ./presentations/$(PROBLEM).py Problem
 
-video:
-	poetry run manimgl animations/$(PROBLEM).py $(PROBLEM) -c "#000" -o --uhd
+build:
+	manim -qk -o out --fps 120 ./presentations/$(PROBLEM).py Problem
